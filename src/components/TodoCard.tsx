@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Todo } from "../model"
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete, MdDone } from "react-icons/md";
@@ -42,13 +42,20 @@ const TodoCard = ({ todo, todos, setTodos }: Props) => {
         )
     }
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(()=> {
+        inputRef.current?.focus();
+    } ,[isEditing])
+
     return (
-        <div className="p-6 bg-cyan-400 flex items-center justify-between w-96 mt-4 rounded-sm shadow-lg hover:bg-cyan-300 cursor-pointer">
+        <div className="p-6 bg-cyan-300 flex items-center justify-between w-96 mt-4 rounded-md shadow-lg hover:bg-cyan-200 cursor-pointer hover:scale-105">
             <div>
                 {
                     isEditing ? (
                         <div className="flex items-center">
                             <input
+                                ref={inputRef}
                                 className="py-1 px-2 rounded-sm"
                                 type="text"
                                 value={editedTodo}
