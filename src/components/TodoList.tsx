@@ -8,7 +8,7 @@ interface Props{
 
 const TodoList = ({todos, setTodos}: Props) => {
   return (
-    <div>
+    <div className="flex flex-col items-center mt-14">
       {
         todos.map((todo) => (
             <TodoCard key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
