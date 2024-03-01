@@ -59,7 +59,7 @@ const TodoCard = ({ todo, todos, setTodos, index, completed }: Props) => {
                     {...provided.draggableProps} 
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
-                    className="p-6 bg-cyan-300 flex items-center justify-between w-96 mt-4 rounded-md shadow-lg hover:bg-cyan-200 cursor-pointer hover:scale-105">
+                    className="p-6 bg-cyan-300 flex items-center justify-between md:w-96 mt-4 rounded-md shadow-lg hover:bg-cyan-200 cursor-pointer hover:scale-105">
                 <div>
                     {
                         isEditing ? (

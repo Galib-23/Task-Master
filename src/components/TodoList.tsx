@@ -13,13 +13,12 @@ interface Props {
 
 const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props) => {
   return (
-    <div className="flex flex-col md:flex-row justify-center">
-      <div className="mt-14 flex gap-10">
+      <div className="mt-14 flex flex-col lg:flex-row gap-10 mb-14">
         <Droppable droppableId="TodosList">
           {
             (provided) => (
               <div 
-              className="bg-green-200 p-7 min-w-96" 
+              className="bg-green-200 h-fit p-7 md:min-w-96" 
               ref={provided.innerRef} 
               {...provided.droppableProps}
               >
@@ -39,7 +38,7 @@ const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props)
         <Droppable droppableId="TodosRemove">
           {
             (provided) => (
-              <div className="bg-fuchsia-200 p-7 min-w-96" ref={provided.innerRef} {...provided.droppableProps}>
+              <div className="bg-fuchsia-200 h-fit p-7 md:min-w-96" ref={provided.innerRef} {...provided.droppableProps}>
                 <h2 className="text-2xl font-bold text-blue-700 flex items-center gap-3">Completed Tasks <span><VscLayersActive /></span></h2>
                 <hr className="mt-2 h-px border-0 bg-blue-700 mb-5" />
                 {
@@ -53,7 +52,6 @@ const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props)
           }
         </Droppable>
       </div>
-    </div>
   )
 }
 
