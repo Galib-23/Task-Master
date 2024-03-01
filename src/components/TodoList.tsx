@@ -1,3 +1,4 @@
+import { Droppable } from "react-beautiful-dnd";
 import { Todo } from "../model"
 import TodoCard from "./TodoCard";
 import { VscLayersActive } from "react-icons/vsc";
@@ -6,30 +7,51 @@ import { VscVmRunning } from "react-icons/vsc";
 interface Props {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  completedTodos: Todo[];
+  setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const TodoList = ({ todos, setTodos }: Props) => {
+const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props) => {
   return (
     <div className="flex flex-col md:flex-row justify-center">
       <div className="mt-14 flex gap-10">
-        <div className="bg-green-200 p-7">
-          <h2 className="text-2xl font-bold text-amber-600 flex items-center gap-3">Active Tasks <span><VscVmRunning /></span></h2>
-          <hr className="mt-2 h-px border-0 bg-amber-600 mb-5" />
+        <Droppable droppableId="TodosList">
           {
-            todos.map((todo) => (
-              <TodoCard key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
-            ))
-          }
-        </div>
-        <div className="bg-fuchsia-200 p-7">
-          <h2 className="text-2xl font-bold text-blue-700 flex items-center gap-3">Completed Tasks <span><VscLayersActive /></span></h2>
-          <hr className="mt-2 h-px border-0 bg-blue-700 mb-5" />
+            (provided) => (
+              <div 
+              className="bg-green-200 p-7 min-w-96" 
+              ref={provided.innerRef} 
+              {...provided.droppableProps}
+              >
+                <h2 className="text-2xl font-bold text-amber-600 flex items-center gap-3">Active Tasks <span><VscVmRunning /></span></h2>
+                <hr className="mt-2 h-px border-0 bg-amber-600 mb-5" />
+                {
+                  todos.map((todo, index) => (
+                    <TodoCard completed={false} index={index} key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
+                  ))
+                }
+                {provided.placeholder}
+              </div>
+            )
+          }    
+          
+        </Droppable>
+        <Droppable droppableId="TodosRemove">
           {
-            todos.map((todo) => (
-              <TodoCard key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
-            ))
+            (provided) => (
+              <div className="bg-fuchsia-200 p-7 min-w-96" ref={provided.innerRef} {...provided.droppableProps}>
+                <h2 className="text-2xl font-bold text-blue-700 flex items-center gap-3">Completed Tasks <span><VscLayersActive /></span></h2>
+                <hr className="mt-2 h-px border-0 bg-blue-700 mb-5" />
+                {
+                 completedTodos && completedTodos.map((todo, index) => (
+                    <TodoCard completed={true} index={index} key={todo.id} todo={todo} todos={completedTodos} setTodos={setCompletedTodos} />
+                  ))
+                }
+                {provided.placeholder}
+              </div>
+            )
           }
-        </div>
+        </Droppable>
       </div>
     </div>
   )
