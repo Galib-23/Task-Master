@@ -2,6 +2,10 @@
 
 This is a simple todo application built with React.js, React Beautiful DnD, and TypeScript. The app allows users to add, update, and delete tasks with a smooth drag-and-drop feature from active tasks to completed tasks.
 
+## Live Demo
+
+You can view the live demo of the app [here](https://task-master-olive.vercel.app/).
+
 ## Features
 
 - **Add Tasks**: Users can add new tasks to the list.
